@@ -1,5 +1,5 @@
-Entity Framework
+Entity Framework : For connecting database.
 Web Essentials 2019
-jQuery.UI.Combined
+jQuery.UI.Combined : For implementing jQuery Datetimepicker in `Host meetup` view.
 Visual studio productivity Power Tools
-Pagedlist.MVC
+Pagedlist.MVC : For crating pagination in `Meetup` view.
