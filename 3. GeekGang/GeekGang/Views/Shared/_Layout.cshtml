@@ -1,0 +1,62 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Platform for Techinal Events.</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/main.css">
+    <style>
+        html, body {
+          height: 100%;
+          margin: 0;
+        }
+        .wrapper {
+          min-height: 100%;
+
+          /* Equal to height of footer */
+          /* But also accounting for potential margin-bottom of last child */
+          margin-bottom: -50px;
+        }
+        .footer,
+        .push {
+          height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        @Html.Partial("_NavBar")
+        @RenderBody()
+        <div class="push"></div>
+    </div>
+    <footer class="footer" style="padding:10px;">
+        <p style="text-align:center; font-weight:bold; color:black">&copy; @DateTime.Now.Year - Platform for Techinal Events.</p>
+    </footer>
+
+    <script src="~/Content/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/Login/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/Content/Login/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Content/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/Login/vendor/select2/select2.min.js"></script>
+    <script src="~/Content/Login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/Login/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Content/Login/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/Content/Login/js/main.js"></script>
+
+    @*For Data annotations*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Meetups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .right {
+            width: 50px;
+            height: 50px;
+            float: right;
+            background: red;
+            border-top-left-radius: 50% 50%;
+            border-top-right-radius: 50% 50%;
+            border-bottom-right-radius: 50% 50%;
+            border-bottom-left-radius: 50% 50%;
+        }
+
+        .left {
+            height: 50px;
+            background: green;
+            overflow: hidden;
+        }
+
+        .padding_20px {
+            padding: 45px 45px 45px 45px;
+        }
+
+        .box {
+            position: relative;
+            background: darkgray;
+            color: #fff;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        #container2 {
+            width: 50%;
+            position: relative;
+            margin: 0 auto;
+            line-height: 1.4em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container2" style="padding:45px 45px 45px 45px;">
+        <h1 class="padding_20px box"><span style="background-color:darkgray; text-shadow: 2px 2px #000000; font-size : 150%;">GeekGang creates possibilities</span></h1>
+        <div class="row padding_20px">
+            <h3>GeekGang is a platform for finding and building local communities. People use Meetup to meet new people, learn new things, find support, get out of their comfort zones, and pursue their passions, together.</h3>
+        </div>
+    </div>
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                window.alert("@TempData["Message"]");
+            }, 0100);
+        </script>
+    }
+
+    @*@if (TempData["Message"] != null)
+        {
+            <script type="text/javascript">
+            $(document).ready(function () {
+                setTimeout(function () {
+                    window.alert("@TempData["Message"]");
+                    window.close();
+                }, 2000);
+            });
+        </script>
+        }*@
+
+    @*@if(TempData["Message"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    alert("@TempData["Message"]");
+                });
+            </script>
+        }*@
+</body>
+</html>
+
+
+

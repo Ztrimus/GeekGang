@@ -1,0 +1,93 @@
+﻿@model IEnumerable<GeekGang.Models.Meetup>
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    string td = "col-md-4";
+}
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .mySlides {
+        }
+
+        .overlap {
+            top: 0px;
+            position: relative;
+            left: 0px;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        .centered {
+            position:absolute;
+            width:100%;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .trans {
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            background-color: black;
+        }
+
+        .padding_20px {
+            padding: 5px 5px 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    @*<div class="jumbotron" style="padding:2%">
+            <h1>GeekGang</h1>
+            <p class="lead">GeekGang brings people together through live experiences. Discover events that match your passions and do more of what matters to you, or create your own and meet people near you who share your interests.</p>
+        </div>*@
+
+    <div class="jumbotron container" style="padding:0px; width:100%">
+            <img class="mySlides trans" src="https://blog.edx.org/wp-content/uploads/2017/02/Untitled-design-10.png" style="width: 100%">
+            <img class="mySlides trans" src="https://st2.depositphotos.com/3591429/10895/i/950/depositphotos_108955066-stock-photo-students-learning-together.jpg" style="width:100%">
+            <img class="mySlides trans" src="https://www.gettingsmart.com/wp-content/uploads/2019/10/43cddc7a-6c4f-4b3c-97e8-067e112b509a_olav-ahrens-rotne-4Ennrbj1svk-unsplash.jpg" style="width:100%">
+            <div class="centered">
+                <h1 style="color:black">GeekGang</h1>
+                <p class="lead" style="color:black">GeekGang brings people together through live experiences. Discover events that match your passions and do more of what matters to you, or create your own and meet people near you who share your interests.</p>
+            </div>
+    </div>
+    <div>
+        <h1 style="text-align:center;padding:10px 10px 20px 10px;">Available Meets</h1>
+    </div>
+    <div class="row">
+        @foreach (GeekGang.Models.Meetup meetup in Model)
+        {
+            <div class="@td" style="border:groove">
+                <div><h2>@meetup.title</h2></div>
+                <div><h6 class="padding_20px">@meetup.date_time</h6></div>
+                <div><h6 class="padding_20px">@meetup.location</h6></div>
+                <p><a class="btn btn-default" href="Meetup/Details/@meetup.id">Details &raquo;</a></p>
+            </div>
+        }
+    </div>
+    <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2000); // Change image every 2 seconds
+        }
+    </script>
+</body>
+</html>

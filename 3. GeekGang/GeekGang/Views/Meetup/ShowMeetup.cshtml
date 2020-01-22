@@ -1,0 +1,23 @@
+﻿@model GeekGang.Models.Meetup
+@{
+    ViewBag.Title = "ShowMeetup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <table>
+                <tr>@Model.title</tr>
+                <tr>@Model.date_time</tr>
+                <tr>@Model.location</tr>
+                <tr></tr>
+                <tr>@Model.detail</tr>
+            </table>
+        </div>
+    </body>
+    </html>
+

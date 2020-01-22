@@ -1,0 +1,98 @@
+﻿<style>
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            .dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    .right {
+        width: 50px;
+        height: 50px;
+        float: right;
+        background: red;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-right-radius: 50% 50%;
+        border-bottom-left-radius: 50% 50%;
+    }
+</style>
+
+<nav style="color: #ffffff" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="~/"><img src=~/Content/Logo.PNG height="60" width="60"> <img src=~/Content/logo_name.PNG height="30" width="120"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active nav-link">
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            <li class="nav-item  nav-link">
+                @Html.ActionLink("Explore Meets", "Index", "Meetup")
+            </li>
+            <li class="nav-item nav-link">
+                @Html.ActionLink("Host Meet", "Index", "Host")
+            </li>
+            <li class="nav-item  nav-link">
+                @Html.ActionLink("About", "About", "Home")
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            @{
+                if (Session["userID"] == null)
+                {
+                    <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Login" onclick="location.href='@Url.Action("Index", "Login")'" style="margin-left:3px; margin-right:3px" />
+                    <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Signup" onclick="location.href='@Url.Action("Index", "Signup")'" style="margin-left:3px; margin-right:3px" />
+                }
+                else
+                {   <div><a style="color:black">Welcome, @Session["Name"]!</a></div>
+                    <div class="dropdown">
+                        <a class="btn"><img class="right" src="https://www.seekpng.com/png/detail/41-410093_circled-user-icon-user-profile-icon-png.png" /></a>
+                        <ul class="dropdown-content">
+                            <li>@Html.ActionLink("Profile", "Index", "User")</li>
+                            <li>@Html.ActionLink("My Meetups", "MyMeetups", "Meetup")</li>
+                            <li>@Html.ActionLink("Logout", "LogOut", "Login")</li>
+                        </ul>
+                    </div>
+                }
+            }
+
+        </form>
+    </div>
+</nav>

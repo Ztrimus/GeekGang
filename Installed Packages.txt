@@ -1,0 +1,5 @@
+Entity Framework
+Web Essentials 2019
+jQuery.UI.Combined
+Visual studio productivity Power Tools
+Pagedlist.MVC

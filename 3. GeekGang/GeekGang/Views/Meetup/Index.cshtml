@@ -1,0 +1,65 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<GeekGang.Models.Meetup>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Meetups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        td {
+            padding: 0px 10px 0px 10px;
+        }
+
+        .pagination {
+            color: black;
+            float: left;
+            text-decoration: none;
+        }
+    </style>
+    @Styles.Render("~/Content/PagedList.css")
+</head>
+<body>
+    <h4>Meetup List</h4>
+    <table>
+        <tr>
+            <td>Sr.No.</td>
+            <td>Title</td>
+            <td>Host</td>
+            <td>Location</td>
+            <td>Date</td>
+            <td>Time</td>
+            <td>Capacity</td>
+            <td>Going</td>
+            <td>More</td>
+        </tr>
+        @foreach (GeekGang.Models.Meetup meetup in Model)
+        {
+            <tr>
+                @{ i++;}
+                <td>@i</td>
+                <td>@meetup.title</td>
+                <td>@meetup.host_name</td>
+                <td>@meetup.location</td>
+                <td>@meetup.date_time.ToString("d MMMM yyyy")</td>
+                <td>@meetup.date_time.ToString("h:mm tt")</td>
+                <td>@meetup.attendees_limit</td>
+                <td>@meetup.attendees_count</td>
+                <td><a class="btn btn-light" href="@Url.Action("Details", "Meetup", new { id=meetup.id})">Show</a></td>
+                @*<td>@Html.ActionLink("ShowMe", "Details", "Meetup", new { id=meetup.id})</td>*@
+            </tr>
+        }
+    </table>
+    <div class="pagination" style="padding-left:10px;">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+    
+</body>
+</html>

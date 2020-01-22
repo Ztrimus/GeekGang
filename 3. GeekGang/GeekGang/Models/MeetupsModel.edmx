@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MeetupsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Meetups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="host_id" Type="int" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="date_time" Type="smalldatetime" Nullable="false" />
+          <Property Name="attendees_limit" Type="int" Nullable="false" />
+          <Property Name="attendees_count" Type="int" Nullable="false" />
+          <Property Name="tags" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="detail" Type="varchar" MaxLength="8000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RSVPs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meet_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Meetups__host_id__46E78A0C">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Meetups" Type="Self.Meetups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meetups">
+              <PropertyRef Name="host_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPs__meet_id__49C3F6B7">
+          <End Role="Meetups" Type="Self.Meetups" Multiplicity="1" />
+          <End Role="RSVPs" Type="Self.RSVPs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RSVPs">
+              <PropertyRef Name="meet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPs__user_id__4AB81AF0">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="RSVPs" Type="Self.RSVPs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RSVPs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MeetupsModelStoreContainer">
+          <EntitySet Name="Meetups" EntityType="Self.Meetups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RSVPs" EntityType="Self.RSVPs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Meetups__host_id__46E78A0C" Association="Self.FK__Meetups__host_id__46E78A0C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Meetups" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPs__meet_id__49C3F6B7" Association="Self.FK__RSVPs__meet_id__49C3F6B7">
+            <End Role="Meetups" EntitySet="Meetups" />
+            <End Role="RSVPs" EntitySet="RSVPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPs__user_id__4AB81AF0" Association="Self.FK__RSVPs__user_id__4AB81AF0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RSVPs" EntitySet="RSVPs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MeetupsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Meetup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="host_id" Type="Int32" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="attendees_limit" Type="Int32" Nullable="false" />
+          <Property Name="attendees_count" Type="Int32" Nullable="false" />
+          <Property Name="tags" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="detail" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Meetups__host_id__46E78A0C" FromRole="Meetups" ToRole="Users" />
+          <NavigationProperty Name="RSVPs" Relationship="Self.FK__RSVPs__meet_id__49C3F6B7" FromRole="Meetups" ToRole="RSVPs" />
+        </EntityType>
+        <EntityType Name="RSVP">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meet_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Meetup" Relationship="Self.FK__RSVPs__meet_id__49C3F6B7" FromRole="RSVPs" ToRole="Meetups" />
+          <NavigationProperty Name="User" Relationship="Self.FK__RSVPs__user_id__4AB81AF0" FromRole="RSVPs" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Meetups" Relationship="Self.FK__Meetups__host_id__46E78A0C" FromRole="Users" ToRole="Meetups" />
+          <NavigationProperty Name="RSVPs" Relationship="Self.FK__RSVPs__user_id__4AB81AF0" FromRole="Users" ToRole="RSVPs" />
+        </EntityType>
+        <Association Name="FK__Meetups__host_id__46E78A0C">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Meetups" Type="Self.Meetup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Meetups">
+              <PropertyRef Name="host_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPs__meet_id__49C3F6B7">
+          <End Role="Meetups" Type="Self.Meetup" Multiplicity="1" />
+          <End Role="RSVPs" Type="Self.RSVP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meetups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RSVPs">
+              <PropertyRef Name="meet_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RSVPs__user_id__4AB81AF0">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="RSVPs" Type="Self.RSVP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RSVPs">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GeekGangContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Meetups" EntityType="Self.Meetup" />
+          <EntitySet Name="RSVPs" EntityType="Self.RSVP" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Meetups__host_id__46E78A0C" Association="Self.FK__Meetups__host_id__46E78A0C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Meetups" EntitySet="Meetups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPs__meet_id__49C3F6B7" Association="Self.FK__RSVPs__meet_id__49C3F6B7">
+            <End Role="Meetups" EntitySet="Meetups" />
+            <End Role="RSVPs" EntitySet="RSVPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RSVPs__user_id__4AB81AF0" Association="Self.FK__RSVPs__user_id__4AB81AF0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RSVPs" EntitySet="RSVPs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MeetupsModelStoreContainer" CdmEntityContainer="GeekGangContext">
+          <EntitySetMapping Name="Meetups">
+            <EntityTypeMapping TypeName="MeetupsModel.Meetup">
+              <MappingFragment StoreEntitySet="Meetups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="host_id" ColumnName="host_id" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="attendees_limit" ColumnName="attendees_limit" />
+                <ScalarProperty Name="attendees_count" ColumnName="attendees_count" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RSVPs">
+            <EntityTypeMapping TypeName="MeetupsModel.RSVP">
+              <MappingFragment StoreEntitySet="RSVPs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="meet_id" ColumnName="meet_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MeetupsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

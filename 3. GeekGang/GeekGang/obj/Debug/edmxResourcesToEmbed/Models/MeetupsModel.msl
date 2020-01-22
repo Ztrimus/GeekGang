@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MeetupsModelStoreContainer" CdmEntityContainer="GeekGangContext">
+    <EntitySetMapping Name="Meetups">
+      <EntityTypeMapping TypeName="MeetupsModel.Meetup">
+        <MappingFragment StoreEntitySet="Meetups">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="host_id" ColumnName="host_id" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="date_time" ColumnName="date_time" />
+          <ScalarProperty Name="attendees_limit" ColumnName="attendees_limit" />
+          <ScalarProperty Name="attendees_count" ColumnName="attendees_count" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="detail" ColumnName="detail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RSVPs">
+      <EntityTypeMapping TypeName="MeetupsModel.RSVP">
+        <MappingFragment StoreEntitySet="RSVPs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="meet_id" ColumnName="meet_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MeetupsModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

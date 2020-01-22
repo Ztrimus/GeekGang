@@ -1,0 +1,157 @@
+﻿@model GeekGang.Models.Meetup
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update</h2>
+
+<html lang="en">
+<head>
+    <title>Host Meet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/Content/Login/images/icons/favicon.ico" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="limiter" id="login-div">
+        @using (Html.BeginForm("Create", "Host", FormMethod.Post))
+        {
+            <div class="container-login100" style="background-image:url('~/Content/Login/images/background.PNG');">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                    <form class="login100-form">
+                        <span class="login100-form-title p-b-49">
+                            Host Meetup
+                        </span>
+                        @Html.HiddenFor(Model => Model.id)
+                        @Html.HiddenFor(Model => Model.host_id)
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.title)</span> <br>
+                            <span>
+                                @Html.EditorFor(Model => Model.title, new { htmlAttributes = new { @class = "form-control wrap-input100" } })<br>
+                                <span style="font-size:small; color:#ff0000">@Html.ValidationMessageFor(Model => Model.title)</span>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.location)</span> <br>
+                            <span>
+                                @Html.EditorFor(Model => Model.location, new { htmlAttributes = new { @class = "form-control wrap-input100" } })<br>
+                                <span style="font-size:small; color:#ff0000">@Html.ValidationMessageFor(Model => Model.location)</span>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.date_time)</span> <br>
+                            <span class="d-inline-block d-inline-flex">
+                                @Html.EditorFor(Model => Model.date_time, new { htmlAttributes = new { @class = "datepicker form-control wrap-input100" } })
+                                <a style="font-size:small; color:#ff0000;">@Html.ValidationMessageFor(Model => Model.date_time)</a>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.attendees_limit)</span> <br>
+                            <span>
+                                @Html.EditorFor(Model => Model.attendees_limit, new { htmlAttributes = new { @class = "form-control wrap-input100" } })<br>
+                                <span style="font-size:small; color:#ff0000">@Html.ValidationMessageFor(Model => Model.attendees_limit)</span>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.tags)</span> <br>
+                            <span>
+                                @Html.EditorFor(Model => Model.tags, new { htmlAttributes = new { @class = "form-control wrap-input100" } })<br>
+                                <span style="font-size:small; color:#ff0000">@Html.ValidationMessageFor(Model => Model.tags)</span>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="label-input100">@Html.LabelFor(Model => Model.detail)</span> <br>
+                            <span>
+                                @Html.EditorFor(Model => Model.detail, new { htmlAttributes = new { @class = "form-control wrap-input100" } })<br>
+                                <span style="font-size:small; color:#ff0000">@Html.ValidationMessageFor(Model => Model.detail)</span>
+                            </span>
+                        </div>
+                        <div>
+                            <label style="color:#ff0000">
+                                @Html.DisplayFor(Model => Model.LoginErrorMessage)
+                            </label>
+                        </div>
+
+                        <div>
+
+                            <a href="#">
+                                @*Forgot password?*@
+                            </a>
+
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button type="submit" name="name" class="login100-form-btn">
+                                    Update My Meet!
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div id="dropDownSelect1"></div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui-timepicker-addon.min.css" rel="stylesheet" />
+
+    @section scripts{
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+        <script src="~/Scripts/jquery-ui-timepicker-addon.min.js"></script>
+        <script>
+            $(function () {
+                $(".datepicker").datetimepicker({
+                    dateFormat: "mm/dd/yy",
+                    changeMonth: true,
+                    changeYear: true,
+                    minDate: '0d',
+                    maxDate: '+10y',
+                    showOn: 'both',
+                    buttonText: "<i class='fa fa-calendar'></i>",
+                    controlType: 'select',
+                    timeFormat: "h:mm TT",
+                });
+            });
+            jQuery.validator.methods.date = function (value, element) {
+                var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+                if (isChrome) {
+                    var d = new Date();
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(d.toLocaleDateString(value)));
+                } else {
+                    return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
+                }
+            };
+
+        </script>
+    }
+
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                window.alert("@TempData["Message"]");
+            }, 0100);
+        </script>
+    }
+
+
+    }
+</body>
+</html>
+
+

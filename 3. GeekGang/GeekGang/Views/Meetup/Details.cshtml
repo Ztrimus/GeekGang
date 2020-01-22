@@ -1,0 +1,138 @@
+﻿@model GeekGang.Models.Meetup
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Meetups</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .right {
+            width: 50px;
+            height: 50px;
+            float: right;
+            background: red;
+            border-top-left-radius: 50% 50%;
+            border-top-right-radius: 50% 50%;
+            border-bottom-right-radius: 50% 50%;
+            border-bottom-left-radius: 50% 50%;
+        }
+
+        .left {
+            height: 50px;
+            background: green;
+            overflow: hidden;
+        }
+
+        .padding_20px {
+            padding: 5px 5px 5px 5px;
+        }
+
+        .box {
+            position: relative;
+            background: darkgray;
+            color: #fff;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        #container2 {
+            width: 50%;
+            position: relative;
+            margin: 0 auto;
+            line-height: 1.4em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container2" style="padding:0px 45px 0px 45px;">
+        <h6 class="padding_20px">@Model.date_time.ToString("dddd, dd MMMM yyyy")</h6>
+        <h1 class="padding_20px box"><span style="background-color:darkgray; text-shadow: 2px 2px #000000">@Model.title</span></h1>
+        <div class="row padding_20px">
+            <div class="flex--row padding_20px"><img class="right circular--square " src="https://www.seekpng.com/png/detail/41-410093_circled-user-icon-user-profile-icon-png.png" /></div>
+            <div>
+                <div>Hosted By</div>
+                <div><b>@ViewBag.host_name</b></div>
+            </div>
+        </div>
+        <h6 class="padding_20px">Time  : @Model.date_time.ToString("h:mm tt")</h6>
+        <h6 class="padding_20px">Venue : @Model.location</h6>
+        <h6 class="padding_20px">Details</h6>
+        <p class="padding_20px">@Model.detail</p>
+        <div>
+            <h5>Attendees(@ViewBag.attendees_count)</h5>
+        </div>
+        <div style="padding:10px 0px 0px 0px;">
+            @if (Session["userID"] == null)
+            {
+                <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Attend" onclick="location.href='@Url.Action("Index", "Login")'" style="margin-left:3px; margin-right:3px" />
+            }
+            else if (Convert.ToInt32(Session["userID"]) == Model.host_id)
+            {
+
+                <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Edit" onclick="location.href='@Url.Action("Update", "Host", new { id = Model.id})'" style="margin-left:3px; margin-right:3px" />
+                <input class="btn btn-secondary my-2 my-sm-0" type="button" value="User Requests" onclick="location.href='@Url.Action("UserRequests", "Host", new { id = Model.id})'" style="margin-left:3px; margin-right:3px" />
+                <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Cancel Meetup" onclick="location.href='@Url.Action("Delete", "Host", new { id = Model.id})'" style="margin-left:3px; margin-right:3px" />
+
+            }
+            else
+            {
+                if (ViewBag.rsvp_status == "Attend")
+                {
+                    <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Attend" onclick="location.href='@Url.Action("Attend", "Meetup", new { id=Model.id})'" style="margin-left:3px; margin-right:3px" />
+                }
+                else if (ViewBag.rsvp_status == "Pending")
+                {
+                    <span style="background-color:#FFFF66" class="btn btn-secondary my-2 my-sm-0"><b style="color:black">@ViewBag.rsvp_status</b></span>
+                    <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Meetup", new { id=Model.id})'" style="margin-left:3px; margin-right:3px; background-color:lightcoral;" />
+
+                }
+                else if (ViewBag.rsvp_status == "Accepted")
+                {
+                    <span style="background-color:lightgreen;" class="btn btn-secondary my-2 my-sm-0"><b style="color:black">You're Going!</b></span>
+                    <input class="btn btn-secondary my-2 my-sm-0" type="button" value="Cancel" onclick="location.href='@Url.Action("Cancel", "Meetup", new { id=Model.id})'" style="margin-left:3px; margin-right:3px; background-color:lightcoral;" />
+                }
+                else if (ViewBag.rsvp_status == "Rejected")
+                {
+                    <span style="background-color:lightcoral" class="btn btn-secondary my-2 my-sm-0"><b style="color:black">@ViewBag.rsvp_status</b></span>
+                }
+            }
+        </div>
+    </div>
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+            setTimeout(function () {
+                window.alert("@TempData["Message"]");
+            }, 0100);
+        </script>
+    }
+
+    @*@if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                window.alert("@TempData["Message"]");
+                window.close();
+            }, 2000);
+        });
+    </script>
+    }*@
+    
+    @*@if(TempData["Message"] != null)
+        {
+            <script>
+                $(document).ready(function () {
+                    alert("@TempData["Message"]");
+                });
+            </script>
+        }*@
+</body>
+</html>
+

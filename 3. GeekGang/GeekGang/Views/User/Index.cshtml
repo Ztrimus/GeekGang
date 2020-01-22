@@ -1,0 +1,26 @@
+﻿  @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+      if (Session["userID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div>
+        <h1>User Profile</h1>
+        <h5>Id : @Session["userID"].ToString()</h5>
+        <h5>Name : @Session["Name"]</h5>
+        <h5>Email : @Session["Email"]</h5>
+    </div>
+</body>
+</html>
+
